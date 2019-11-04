@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.test1.mapper.UserinfoMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.test1.model.Userinfo" >
+    <constructor >
+      <idArg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="user_account_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="user_phone" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="user_identity_card" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="user_bank_card" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="user_reputation" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="user_rank" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    user_id, user_account_id, user_name, user_phone, user_identity_card, user_bank_card, 
+    user_reputation, user_rank
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_userinfo
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_userinfo
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zking.test1.model.Userinfo" >
+    insert into t_userinfo (user_id, user_account_id, user_name, 
+      user_phone, user_identity_card, user_bank_card, 
+      user_reputation, user_rank)
+    values (#{userId,jdbcType=INTEGER}, #{userAccountId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
+      #{userPhone,jdbcType=VARCHAR}, #{userIdentityCard,jdbcType=VARCHAR}, #{userBankCard,jdbcType=VARCHAR}, 
+      #{userReputation,jdbcType=INTEGER}, #{userRank,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.test1.model.Userinfo" >
+    insert into t_userinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userAccountId != null" >
+        user_account_id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="userPhone != null" >
+        user_phone,
+      </if>
+      <if test="userIdentityCard != null" >
+        user_identity_card,
+      </if>
+      <if test="userBankCard != null" >
+        user_bank_card,
+      </if>
+      <if test="userReputation != null" >
+        user_reputation,
+      </if>
+      <if test="userRank != null" >
+        user_rank,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userAccountId != null" >
+        #{userAccountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null" >
+        #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="userIdentityCard != null" >
+        #{userIdentityCard,jdbcType=VARCHAR},
+      </if>
+      <if test="userBankCard != null" >
+        #{userBankCard,jdbcType=VARCHAR},
+      </if>
+      <if test="userReputation != null" >
+        #{userReputation,jdbcType=INTEGER},
+      </if>
+      <if test="userRank != null" >
+        #{userRank,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.test1.model.Userinfo" >
+    update t_userinfo
+    <set >
+      <if test="userAccountId != null" >
+        user_account_id = #{userAccountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null" >
+        user_phone = #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="userIdentityCard != null" >
+        user_identity_card = #{userIdentityCard,jdbcType=VARCHAR},
+      </if>
+      <if test="userBankCard != null" >
+        user_bank_card = #{userBankCard,jdbcType=VARCHAR},
+      </if>
+      <if test="userReputation != null" >
+        user_reputation = #{userReputation,jdbcType=INTEGER},
+      </if>
+      <if test="userRank != null" >
+        user_rank = #{userRank,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.test1.model.Userinfo" >
+    update t_userinfo
+    set user_account_id = #{userAccountId,jdbcType=INTEGER},
+      user_name = #{userName,jdbcType=VARCHAR},
+      user_phone = #{userPhone,jdbcType=VARCHAR},
+      user_identity_card = #{userIdentityCard,jdbcType=VARCHAR},
+      user_bank_card = #{userBankCard,jdbcType=VARCHAR},
+      user_reputation = #{userReputation,jdbcType=INTEGER},
+      user_rank = #{userRank,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+</mapper>

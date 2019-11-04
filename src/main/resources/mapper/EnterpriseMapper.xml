@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.test1.mapper.EnterpriseMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.test1.model.Enterprise" >
+    <constructor >
+      <idArg column="enterprise_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="enterprise_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="enterprise_address" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="enterprise_linkman" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="enterprise_linkman_phone" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    enterprise_id, enterprise_name, enterprise_address, enterprise_linkman, enterprise_linkman_phone
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_enterprise
+    where enterprise_id = #{enterpriseId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_enterprise
+    where enterprise_id = #{enterpriseId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zking.test1.model.Enterprise" >
+    insert into t_enterprise (enterprise_id, enterprise_name, enterprise_address, 
+      enterprise_linkman, enterprise_linkman_phone
+      )
+    values (#{enterpriseId,jdbcType=INTEGER}, #{enterpriseName,jdbcType=VARCHAR}, #{enterpriseAddress,jdbcType=VARCHAR}, 
+      #{enterpriseLinkman,jdbcType=VARCHAR}, #{enterpriseLinkmanPhone,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.test1.model.Enterprise" >
+    insert into t_enterprise
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="enterpriseId != null" >
+        enterprise_id,
+      </if>
+      <if test="enterpriseName != null" >
+        enterprise_name,
+      </if>
+      <if test="enterpriseAddress != null" >
+        enterprise_address,
+      </if>
+      <if test="enterpriseLinkman != null" >
+        enterprise_linkman,
+      </if>
+      <if test="enterpriseLinkmanPhone != null" >
+        enterprise_linkman_phone,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="enterpriseId != null" >
+        #{enterpriseId,jdbcType=INTEGER},
+      </if>
+      <if test="enterpriseName != null" >
+        #{enterpriseName,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseAddress != null" >
+        #{enterpriseAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseLinkman != null" >
+        #{enterpriseLinkman,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseLinkmanPhone != null" >
+        #{enterpriseLinkmanPhone,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.test1.model.Enterprise" >
+    update t_enterprise
+    <set >
+      <if test="enterpriseName != null" >
+        enterprise_name = #{enterpriseName,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseAddress != null" >
+        enterprise_address = #{enterpriseAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseLinkman != null" >
+        enterprise_linkman = #{enterpriseLinkman,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseLinkmanPhone != null" >
+        enterprise_linkman_phone = #{enterpriseLinkmanPhone,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where enterprise_id = #{enterpriseId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.test1.model.Enterprise" >
+    update t_enterprise
+    set enterprise_name = #{enterpriseName,jdbcType=VARCHAR},
+      enterprise_address = #{enterpriseAddress,jdbcType=VARCHAR},
+      enterprise_linkman = #{enterpriseLinkman,jdbcType=VARCHAR},
+      enterprise_linkman_phone = #{enterpriseLinkmanPhone,jdbcType=VARCHAR}
+    where enterprise_id = #{enterpriseId,jdbcType=INTEGER}
+  </update>
+</mapper>

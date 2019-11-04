@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.test1.mapper.StaffMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.test1.model.Staff" >
+    <constructor >
+      <idArg column="staff_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="staff_admin_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="staff_department_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="staff_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="staff_phone" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="staff_entry_date" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="staff_describe" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    staff_id, staff_admin_id, staff_department_id, staff_name, staff_phone, staff_entry_date, 
+    staff_describe
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_staff
+    where staff_id = #{staffId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_staff
+    where staff_id = #{staffId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zking.test1.model.Staff" >
+    insert into t_staff (staff_id, staff_admin_id, staff_department_id, 
+      staff_name, staff_phone, staff_entry_date, 
+      staff_describe)
+    values (#{staffId,jdbcType=INTEGER}, #{staffAdminId,jdbcType=INTEGER}, #{staffDepartmentId,jdbcType=INTEGER}, 
+      #{staffName,jdbcType=VARCHAR}, #{staffPhone,jdbcType=VARCHAR}, #{staffEntryDate,jdbcType=TIMESTAMP}, 
+      #{staffDescribe,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.test1.model.Staff" >
+    insert into t_staff
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="staffId != null" >
+        staff_id,
+      </if>
+      <if test="staffAdminId != null" >
+        staff_admin_id,
+      </if>
+      <if test="staffDepartmentId != null" >
+        staff_department_id,
+      </if>
+      <if test="staffName != null" >
+        staff_name,
+      </if>
+      <if test="staffPhone != null" >
+        staff_phone,
+      </if>
+      <if test="staffEntryDate != null" >
+        staff_entry_date,
+      </if>
+      <if test="staffDescribe != null" >
+        staff_describe,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="staffId != null" >
+        #{staffId,jdbcType=INTEGER},
+      </if>
+      <if test="staffAdminId != null" >
+        #{staffAdminId,jdbcType=INTEGER},
+      </if>
+      <if test="staffDepartmentId != null" >
+        #{staffDepartmentId,jdbcType=INTEGER},
+      </if>
+      <if test="staffName != null" >
+        #{staffName,jdbcType=VARCHAR},
+      </if>
+      <if test="staffPhone != null" >
+        #{staffPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="staffEntryDate != null" >
+        #{staffEntryDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="staffDescribe != null" >
+        #{staffDescribe,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.test1.model.Staff" >
+    update t_staff
+    <set >
+      <if test="staffAdminId != null" >
+        staff_admin_id = #{staffAdminId,jdbcType=INTEGER},
+      </if>
+      <if test="staffDepartmentId != null" >
+        staff_department_id = #{staffDepartmentId,jdbcType=INTEGER},
+      </if>
+      <if test="staffName != null" >
+        staff_name = #{staffName,jdbcType=VARCHAR},
+      </if>
+      <if test="staffPhone != null" >
+        staff_phone = #{staffPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="staffEntryDate != null" >
+        staff_entry_date = #{staffEntryDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="staffDescribe != null" >
+        staff_describe = #{staffDescribe,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where staff_id = #{staffId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.test1.model.Staff" >
+    update t_staff
+    set staff_admin_id = #{staffAdminId,jdbcType=INTEGER},
+      staff_department_id = #{staffDepartmentId,jdbcType=INTEGER},
+      staff_name = #{staffName,jdbcType=VARCHAR},
+      staff_phone = #{staffPhone,jdbcType=VARCHAR},
+      staff_entry_date = #{staffEntryDate,jdbcType=TIMESTAMP},
+      staff_describe = #{staffDescribe,jdbcType=VARCHAR}
+    where staff_id = #{staffId,jdbcType=INTEGER}
+  </update>
+</mapper>

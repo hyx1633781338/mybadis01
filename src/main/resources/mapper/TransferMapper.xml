@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.test1.mapper.TransferMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.test1.model.Transfer" >
+    <constructor >
+      <idArg column="transfer_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="transfer_borrower_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="transfer_admin_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="transfer_enterprise_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="transfer_money" jdbcType="REAL" javaType="java.lang.Float" />
+      <arg column="transfer_date" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    transfer_id, transfer_borrower_id, transfer_admin_id, transfer_enterprise_id, transfer_money, 
+    transfer_date
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_transfer
+    where transfer_id = #{transferId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_transfer
+    where transfer_id = #{transferId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zking.test1.model.Transfer" >
+    insert into t_transfer (transfer_id, transfer_borrower_id, transfer_admin_id, 
+      transfer_enterprise_id, transfer_money, transfer_date
+      )
+    values (#{transferId,jdbcType=INTEGER}, #{transferBorrowerId,jdbcType=INTEGER}, #{transferAdminId,jdbcType=INTEGER}, 
+      #{transferEnterpriseId,jdbcType=INTEGER}, #{transferMoney,jdbcType=REAL}, #{transferDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.test1.model.Transfer" >
+    insert into t_transfer
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="transferId != null" >
+        transfer_id,
+      </if>
+      <if test="transferBorrowerId != null" >
+        transfer_borrower_id,
+      </if>
+      <if test="transferAdminId != null" >
+        transfer_admin_id,
+      </if>
+      <if test="transferEnterpriseId != null" >
+        transfer_enterprise_id,
+      </if>
+      <if test="transferMoney != null" >
+        transfer_money,
+      </if>
+      <if test="transferDate != null" >
+        transfer_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="transferId != null" >
+        #{transferId,jdbcType=INTEGER},
+      </if>
+      <if test="transferBorrowerId != null" >
+        #{transferBorrowerId,jdbcType=INTEGER},
+      </if>
+      <if test="transferAdminId != null" >
+        #{transferAdminId,jdbcType=INTEGER},
+      </if>
+      <if test="transferEnterpriseId != null" >
+        #{transferEnterpriseId,jdbcType=INTEGER},
+      </if>
+      <if test="transferMoney != null" >
+        #{transferMoney,jdbcType=REAL},
+      </if>
+      <if test="transferDate != null" >
+        #{transferDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.test1.model.Transfer" >
+    update t_transfer
+    <set >
+      <if test="transferBorrowerId != null" >
+        transfer_borrower_id = #{transferBorrowerId,jdbcType=INTEGER},
+      </if>
+      <if test="transferAdminId != null" >
+        transfer_admin_id = #{transferAdminId,jdbcType=INTEGER},
+      </if>
+      <if test="transferEnterpriseId != null" >
+        transfer_enterprise_id = #{transferEnterpriseId,jdbcType=INTEGER},
+      </if>
+      <if test="transferMoney != null" >
+        transfer_money = #{transferMoney,jdbcType=REAL},
+      </if>
+      <if test="transferDate != null" >
+        transfer_date = #{transferDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where transfer_id = #{transferId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.test1.model.Transfer" >
+    update t_transfer
+    set transfer_borrower_id = #{transferBorrowerId,jdbcType=INTEGER},
+      transfer_admin_id = #{transferAdminId,jdbcType=INTEGER},
+      transfer_enterprise_id = #{transferEnterpriseId,jdbcType=INTEGER},
+      transfer_money = #{transferMoney,jdbcType=REAL},
+      transfer_date = #{transferDate,jdbcType=TIMESTAMP}
+    where transfer_id = #{transferId,jdbcType=INTEGER}
+  </update>
+</mapper>

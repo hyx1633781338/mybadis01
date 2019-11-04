@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.test1.mapper.BorrowerMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.test1.model.Borrower" >
+    <constructor >
+      <idArg column="borrower_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="borrower_agreement_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="borrower_admin_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="already_money" jdbcType="REAL" javaType="java.lang.Float" />
+      <arg column="not_money" jdbcType="REAL" javaType="java.lang.Float" />
+      <arg column="overdue_money" jdbcType="REAL" javaType="java.lang.Float" />
+      <arg column="state" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    borrower_id, borrower_agreement_id, borrower_admin_id, already_money, not_money, 
+    overdue_money, state
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_borrower
+    where borrower_id = #{borrowerId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_borrower
+    where borrower_id = #{borrowerId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zking.test1.model.Borrower" >
+    insert into t_borrower (borrower_id, borrower_agreement_id, 
+      borrower_admin_id, already_money, not_money, 
+      overdue_money, state)
+    values (#{borrowerId,jdbcType=INTEGER}, #{borrowerAgreementId,jdbcType=INTEGER}, 
+      #{borrowerAdminId,jdbcType=INTEGER}, #{alreadyMoney,jdbcType=REAL}, #{notMoney,jdbcType=REAL}, 
+      #{overdueMoney,jdbcType=REAL}, #{state,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.test1.model.Borrower" >
+    insert into t_borrower
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="borrowerId != null" >
+        borrower_id,
+      </if>
+      <if test="borrowerAgreementId != null" >
+        borrower_agreement_id,
+      </if>
+      <if test="borrowerAdminId != null" >
+        borrower_admin_id,
+      </if>
+      <if test="alreadyMoney != null" >
+        already_money,
+      </if>
+      <if test="notMoney != null" >
+        not_money,
+      </if>
+      <if test="overdueMoney != null" >
+        overdue_money,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="borrowerId != null" >
+        #{borrowerId,jdbcType=INTEGER},
+      </if>
+      <if test="borrowerAgreementId != null" >
+        #{borrowerAgreementId,jdbcType=INTEGER},
+      </if>
+      <if test="borrowerAdminId != null" >
+        #{borrowerAdminId,jdbcType=INTEGER},
+      </if>
+      <if test="alreadyMoney != null" >
+        #{alreadyMoney,jdbcType=REAL},
+      </if>
+      <if test="notMoney != null" >
+        #{notMoney,jdbcType=REAL},
+      </if>
+      <if test="overdueMoney != null" >
+        #{overdueMoney,jdbcType=REAL},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.test1.model.Borrower" >
+    update t_borrower
+    <set >
+      <if test="borrowerAgreementId != null" >
+        borrower_agreement_id = #{borrowerAgreementId,jdbcType=INTEGER},
+      </if>
+      <if test="borrowerAdminId != null" >
+        borrower_admin_id = #{borrowerAdminId,jdbcType=INTEGER},
+      </if>
+      <if test="alreadyMoney != null" >
+        already_money = #{alreadyMoney,jdbcType=REAL},
+      </if>
+      <if test="notMoney != null" >
+        not_money = #{notMoney,jdbcType=REAL},
+      </if>
+      <if test="overdueMoney != null" >
+        overdue_money = #{overdueMoney,jdbcType=REAL},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where borrower_id = #{borrowerId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.test1.model.Borrower" >
+    update t_borrower
+    set borrower_agreement_id = #{borrowerAgreementId,jdbcType=INTEGER},
+      borrower_admin_id = #{borrowerAdminId,jdbcType=INTEGER},
+      already_money = #{alreadyMoney,jdbcType=REAL},
+      not_money = #{notMoney,jdbcType=REAL},
+      overdue_money = #{overdueMoney,jdbcType=REAL},
+      state = #{state,jdbcType=VARCHAR}
+    where borrower_id = #{borrowerId,jdbcType=INTEGER}
+  </update>
+</mapper>

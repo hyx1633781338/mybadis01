@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.test1.mapper.RoleJurisdictionMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.test1.model.RoleJurisdiction" >
+    <constructor >
+      <arg column="role_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="jurisdiction_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <insert id="insert" parameterType="com.zking.test1.model.RoleJurisdiction" >
+    insert into t_role_jurisdiction (role_id, jurisdiction_id)
+    values (#{roleId,jdbcType=INTEGER}, #{jurisdictionId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.test1.model.RoleJurisdiction" >
+    insert into t_role_jurisdiction
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="roleId != null" >
+        role_id,
+      </if>
+      <if test="jurisdictionId != null" >
+        jurisdiction_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="roleId != null" >
+        #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="jurisdictionId != null" >
+        #{jurisdictionId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>

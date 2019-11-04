@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.test1.mapper.AgreementMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.test1.model.Agreement" >
+    <constructor >
+      <idArg column="agreement_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="agreement_account_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="agreement_product_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="agreement_admin_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="agreement_money" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="agreement_periods" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="agreement_date" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="repayment_date" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="agreement_interest" jdbcType="REAL" javaType="java.lang.Float" />
+      <arg column="overdue_interest" jdbcType="REAL" javaType="java.lang.Float" />
+      <arg column="periods_money" jdbcType="REAL" javaType="java.lang.Float" />
+      <arg column="repayment_money" jdbcType="REAL" javaType="java.lang.Float" />
+      <arg column="agreement_create_date" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    agreement_id, agreement_account_id, agreement_product_id, agreement_admin_id, agreement_money, 
+    agreement_periods, agreement_date, repayment_date, agreement_interest, overdue_interest, 
+    periods_money, repayment_money, agreement_create_date
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_agreement
+    where agreement_id = #{agreementId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_agreement
+    where agreement_id = #{agreementId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zking.test1.model.Agreement" >
+    insert into t_agreement (agreement_id, agreement_account_id, 
+      agreement_product_id, agreement_admin_id, agreement_money, 
+      agreement_periods, agreement_date, repayment_date, 
+      agreement_interest, overdue_interest, periods_money, 
+      repayment_money, agreement_create_date)
+    values (#{agreementId,jdbcType=INTEGER}, #{agreementAccountId,jdbcType=INTEGER}, 
+      #{agreementProductId,jdbcType=INTEGER}, #{agreementAdminId,jdbcType=VARCHAR}, #{agreementMoney,jdbcType=INTEGER}, 
+      #{agreementPeriods,jdbcType=INTEGER}, #{agreementDate,jdbcType=INTEGER}, #{repaymentDate,jdbcType=VARCHAR}, 
+      #{agreementInterest,jdbcType=REAL}, #{overdueInterest,jdbcType=REAL}, #{periodsMoney,jdbcType=REAL}, 
+      #{repaymentMoney,jdbcType=REAL}, #{agreementCreateDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.test1.model.Agreement" >
+    insert into t_agreement
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="agreementId != null" >
+        agreement_id,
+      </if>
+      <if test="agreementAccountId != null" >
+        agreement_account_id,
+      </if>
+      <if test="agreementProductId != null" >
+        agreement_product_id,
+      </if>
+      <if test="agreementAdminId != null" >
+        agreement_admin_id,
+      </if>
+      <if test="agreementMoney != null" >
+        agreement_money,
+      </if>
+      <if test="agreementPeriods != null" >
+        agreement_periods,
+      </if>
+      <if test="agreementDate != null" >
+        agreement_date,
+      </if>
+      <if test="repaymentDate != null" >
+        repayment_date,
+      </if>
+      <if test="agreementInterest != null" >
+        agreement_interest,
+      </if>
+      <if test="overdueInterest != null" >
+        overdue_interest,
+      </if>
+      <if test="periodsMoney != null" >
+        periods_money,
+      </if>
+      <if test="repaymentMoney != null" >
+        repayment_money,
+      </if>
+      <if test="agreementCreateDate != null" >
+        agreement_create_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="agreementId != null" >
+        #{agreementId,jdbcType=INTEGER},
+      </if>
+      <if test="agreementAccountId != null" >
+        #{agreementAccountId,jdbcType=INTEGER},
+      </if>
+      <if test="agreementProductId != null" >
+        #{agreementProductId,jdbcType=INTEGER},
+      </if>
+      <if test="agreementAdminId != null" >
+        #{agreementAdminId,jdbcType=VARCHAR},
+      </if>
+      <if test="agreementMoney != null" >
+        #{agreementMoney,jdbcType=INTEGER},
+      </if>
+      <if test="agreementPeriods != null" >
+        #{agreementPeriods,jdbcType=INTEGER},
+      </if>
+      <if test="agreementDate != null" >
+        #{agreementDate,jdbcType=INTEGER},
+      </if>
+      <if test="repaymentDate != null" >
+        #{repaymentDate,jdbcType=VARCHAR},
+      </if>
+      <if test="agreementInterest != null" >
+        #{agreementInterest,jdbcType=REAL},
+      </if>
+      <if test="overdueInterest != null" >
+        #{overdueInterest,jdbcType=REAL},
+      </if>
+      <if test="periodsMoney != null" >
+        #{periodsMoney,jdbcType=REAL},
+      </if>
+      <if test="repaymentMoney != null" >
+        #{repaymentMoney,jdbcType=REAL},
+      </if>
+      <if test="agreementCreateDate != null" >
+        #{agreementCreateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.test1.model.Agreement" >
+    update t_agreement
+    <set >
+      <if test="agreementAccountId != null" >
+        agreement_account_id = #{agreementAccountId,jdbcType=INTEGER},
+      </if>
+      <if test="agreementProductId != null" >
+        agreement_product_id = #{agreementProductId,jdbcType=INTEGER},
+      </if>
+      <if test="agreementAdminId != null" >
+        agreement_admin_id = #{agreementAdminId,jdbcType=VARCHAR},
+      </if>
+      <if test="agreementMoney != null" >
+        agreement_money = #{agreementMoney,jdbcType=INTEGER},
+      </if>
+      <if test="agreementPeriods != null" >
+        agreement_periods = #{agreementPeriods,jdbcType=INTEGER},
+      </if>
+      <if test="agreementDate != null" >
+        agreement_date = #{agreementDate,jdbcType=INTEGER},
+      </if>
+      <if test="repaymentDate != null" >
+        repayment_date = #{repaymentDate,jdbcType=VARCHAR},
+      </if>
+      <if test="agreementInterest != null" >
+        agreement_interest = #{agreementInterest,jdbcType=REAL},
+      </if>
+      <if test="overdueInterest != null" >
+        overdue_interest = #{overdueInterest,jdbcType=REAL},
+      </if>
+      <if test="periodsMoney != null" >
+        periods_money = #{periodsMoney,jdbcType=REAL},
+      </if>
+      <if test="repaymentMoney != null" >
+        repayment_money = #{repaymentMoney,jdbcType=REAL},
+      </if>
+      <if test="agreementCreateDate != null" >
+        agreement_create_date = #{agreementCreateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where agreement_id = #{agreementId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.test1.model.Agreement" >
+    update t_agreement
+    set agreement_account_id = #{agreementAccountId,jdbcType=INTEGER},
+      agreement_product_id = #{agreementProductId,jdbcType=INTEGER},
+      agreement_admin_id = #{agreementAdminId,jdbcType=VARCHAR},
+      agreement_money = #{agreementMoney,jdbcType=INTEGER},
+      agreement_periods = #{agreementPeriods,jdbcType=INTEGER},
+      agreement_date = #{agreementDate,jdbcType=INTEGER},
+      repayment_date = #{repaymentDate,jdbcType=VARCHAR},
+      agreement_interest = #{agreementInterest,jdbcType=REAL},
+      overdue_interest = #{overdueInterest,jdbcType=REAL},
+      periods_money = #{periodsMoney,jdbcType=REAL},
+      repayment_money = #{repaymentMoney,jdbcType=REAL},
+      agreement_create_date = #{agreementCreateDate,jdbcType=TIMESTAMP}
+    where agreement_id = #{agreementId,jdbcType=INTEGER}
+  </update>
+</mapper>

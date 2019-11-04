@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.test1.mapper.ProductMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.test1.model.Product" >
+    <constructor >
+      <idArg column="product_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="product_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="product_max_month" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="product_min_month" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="product_max_periods" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="product_min_periods" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="product_max_interest" jdbcType="REAL" javaType="java.lang.Float" />
+      <arg column="product_min_interest" jdbcType="REAL" javaType="java.lang.Float" />
+      <arg column="product_max_money" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="product_min_money" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="product_state" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    product_id, product_name, product_max_month, product_min_month, product_max_periods, 
+    product_min_periods, product_max_interest, product_min_interest, product_max_money, 
+    product_min_money, product_state
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_product
+    where product_id = #{productId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_product
+    where product_id = #{productId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zking.test1.model.Product" >
+    insert into t_product (product_id, product_name, product_max_month, 
+      product_min_month, product_max_periods, product_min_periods, 
+      product_max_interest, product_min_interest, product_max_money, 
+      product_min_money, product_state)
+    values (#{productId,jdbcType=INTEGER}, #{productName,jdbcType=VARCHAR}, #{productMaxMonth,jdbcType=INTEGER}, 
+      #{productMinMonth,jdbcType=INTEGER}, #{productMaxPeriods,jdbcType=INTEGER}, #{productMinPeriods,jdbcType=INTEGER}, 
+      #{productMaxInterest,jdbcType=REAL}, #{productMinInterest,jdbcType=REAL}, #{productMaxMoney,jdbcType=INTEGER}, 
+      #{productMinMoney,jdbcType=INTEGER}, #{productState,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.test1.model.Product" >
+    insert into t_product
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="productId != null" >
+        product_id,
+      </if>
+      <if test="productName != null" >
+        product_name,
+      </if>
+      <if test="productMaxMonth != null" >
+        product_max_month,
+      </if>
+      <if test="productMinMonth != null" >
+        product_min_month,
+      </if>
+      <if test="productMaxPeriods != null" >
+        product_max_periods,
+      </if>
+      <if test="productMinPeriods != null" >
+        product_min_periods,
+      </if>
+      <if test="productMaxInterest != null" >
+        product_max_interest,
+      </if>
+      <if test="productMinInterest != null" >
+        product_min_interest,
+      </if>
+      <if test="productMaxMoney != null" >
+        product_max_money,
+      </if>
+      <if test="productMinMoney != null" >
+        product_min_money,
+      </if>
+      <if test="productState != null" >
+        product_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="productId != null" >
+        #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="productName != null" >
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productMaxMonth != null" >
+        #{productMaxMonth,jdbcType=INTEGER},
+      </if>
+      <if test="productMinMonth != null" >
+        #{productMinMonth,jdbcType=INTEGER},
+      </if>
+      <if test="productMaxPeriods != null" >
+        #{productMaxPeriods,jdbcType=INTEGER},
+      </if>
+      <if test="productMinPeriods != null" >
+        #{productMinPeriods,jdbcType=INTEGER},
+      </if>
+      <if test="productMaxInterest != null" >
+        #{productMaxInterest,jdbcType=REAL},
+      </if>
+      <if test="productMinInterest != null" >
+        #{productMinInterest,jdbcType=REAL},
+      </if>
+      <if test="productMaxMoney != null" >
+        #{productMaxMoney,jdbcType=INTEGER},
+      </if>
+      <if test="productMinMoney != null" >
+        #{productMinMoney,jdbcType=INTEGER},
+      </if>
+      <if test="productState != null" >
+        #{productState,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.test1.model.Product" >
+    update t_product
+    <set >
+      <if test="productName != null" >
+        product_name = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productMaxMonth != null" >
+        product_max_month = #{productMaxMonth,jdbcType=INTEGER},
+      </if>
+      <if test="productMinMonth != null" >
+        product_min_month = #{productMinMonth,jdbcType=INTEGER},
+      </if>
+      <if test="productMaxPeriods != null" >
+        product_max_periods = #{productMaxPeriods,jdbcType=INTEGER},
+      </if>
+      <if test="productMinPeriods != null" >
+        product_min_periods = #{productMinPeriods,jdbcType=INTEGER},
+      </if>
+      <if test="productMaxInterest != null" >
+        product_max_interest = #{productMaxInterest,jdbcType=REAL},
+      </if>
+      <if test="productMinInterest != null" >
+        product_min_interest = #{productMinInterest,jdbcType=REAL},
+      </if>
+      <if test="productMaxMoney != null" >
+        product_max_money = #{productMaxMoney,jdbcType=INTEGER},
+      </if>
+      <if test="productMinMoney != null" >
+        product_min_money = #{productMinMoney,jdbcType=INTEGER},
+      </if>
+      <if test="productState != null" >
+        product_state = #{productState,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where product_id = #{productId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.test1.model.Product" >
+    update t_product
+    set product_name = #{productName,jdbcType=VARCHAR},
+      product_max_month = #{productMaxMonth,jdbcType=INTEGER},
+      product_min_month = #{productMinMonth,jdbcType=INTEGER},
+      product_max_periods = #{productMaxPeriods,jdbcType=INTEGER},
+      product_min_periods = #{productMinPeriods,jdbcType=INTEGER},
+      product_max_interest = #{productMaxInterest,jdbcType=REAL},
+      product_min_interest = #{productMinInterest,jdbcType=REAL},
+      product_max_money = #{productMaxMoney,jdbcType=INTEGER},
+      product_min_money = #{productMinMoney,jdbcType=INTEGER},
+      product_state = #{productState,jdbcType=VARCHAR}
+    where product_id = #{productId,jdbcType=INTEGER}
+  </update>
+</mapper>

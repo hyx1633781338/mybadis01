@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.test1.mapper.CollectionMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.test1.model.Collection" >
+    <constructor >
+      <idArg column="collection_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="collection_admin_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="collection_borrower_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="collection_describe" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="collection_date" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    collection_id, collection_admin_id, collection_borrower_id, collection_describe, 
+    collection_date
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_collection
+    where collection_id = #{collectionId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_collection
+    where collection_id = #{collectionId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zking.test1.model.Collection" >
+    insert into t_collection (collection_id, collection_admin_id, 
+      collection_borrower_id, collection_describe, 
+      collection_date)
+    values (#{collectionId,jdbcType=INTEGER}, #{collectionAdminId,jdbcType=INTEGER}, 
+      #{collectionBorrowerId,jdbcType=INTEGER}, #{collectionDescribe,jdbcType=VARCHAR}, 
+      #{collectionDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.test1.model.Collection" >
+    insert into t_collection
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="collectionId != null" >
+        collection_id,
+      </if>
+      <if test="collectionAdminId != null" >
+        collection_admin_id,
+      </if>
+      <if test="collectionBorrowerId != null" >
+        collection_borrower_id,
+      </if>
+      <if test="collectionDescribe != null" >
+        collection_describe,
+      </if>
+      <if test="collectionDate != null" >
+        collection_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="collectionId != null" >
+        #{collectionId,jdbcType=INTEGER},
+      </if>
+      <if test="collectionAdminId != null" >
+        #{collectionAdminId,jdbcType=INTEGER},
+      </if>
+      <if test="collectionBorrowerId != null" >
+        #{collectionBorrowerId,jdbcType=INTEGER},
+      </if>
+      <if test="collectionDescribe != null" >
+        #{collectionDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="collectionDate != null" >
+        #{collectionDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.test1.model.Collection" >
+    update t_collection
+    <set >
+      <if test="collectionAdminId != null" >
+        collection_admin_id = #{collectionAdminId,jdbcType=INTEGER},
+      </if>
+      <if test="collectionBorrowerId != null" >
+        collection_borrower_id = #{collectionBorrowerId,jdbcType=INTEGER},
+      </if>
+      <if test="collectionDescribe != null" >
+        collection_describe = #{collectionDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="collectionDate != null" >
+        collection_date = #{collectionDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where collection_id = #{collectionId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.test1.model.Collection" >
+    update t_collection
+    set collection_admin_id = #{collectionAdminId,jdbcType=INTEGER},
+      collection_borrower_id = #{collectionBorrowerId,jdbcType=INTEGER},
+      collection_describe = #{collectionDescribe,jdbcType=VARCHAR},
+      collection_date = #{collectionDate,jdbcType=TIMESTAMP}
+    where collection_id = #{collectionId,jdbcType=INTEGER}
+  </update>
+</mapper>
